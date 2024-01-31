@@ -34,6 +34,13 @@ The stub project is generated
             - rename_proect.py
             - run_app.py
             - wait_for_db.py
+    - migrations
+    - tests
+    - __init__.py
+    - admin
+    - apps.py
+    - models.py
+
 - .dockerignore
 - .flake8
 - docker-cmpose.debug.yml
