@@ -62,4 +62,4 @@ Some helper command are included in the create project.
 1. ```wait_for_db```  . Wait until the database is avaliable. Useful when undertaking a migraion e.g.
    ``` python manage.py wait_for_db && python manage,py makemigration ```
 2. ```run_app``` . Combines the commands ```wait_for_db``` with ```runserver```. The server will not run until the database is ready.
-3. ```rename_projct <old_name> <new_name>``` . Renames and updates the Django project to use a new project name.
+3. ```rename_project <old_name> <new_name>``` . Renames and updates the Django project to use a new project name.
