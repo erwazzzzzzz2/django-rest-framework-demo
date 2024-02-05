@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Workbench&display=swap');
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1em;
+    letter-spacing: 0.02em;
+ 
+}
+
+body {
+    font-family:'Workbench';
+}
+
+a {
+    font-style: italic;
+    text-align: center;
+  }
