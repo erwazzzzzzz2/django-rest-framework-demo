@@ -37,5 +37,4 @@ class AnimalViewSet(viewsets.ModelViewSet):
         print(f"ACTION = {self.action} and {self.action in UNAUTH_ACTIONS}")
         if self.action not in UNAUTH_ACTIONS:
             return [IsAuthenticated()]
-            # return [permission() for permission in permission_classes]
         return []
