@@ -54,7 +54,7 @@ class Animal(models.Model):
     age = models.IntegerField(validators=[MaxValueValidator(360), MinValueValidator(1)])
     type = models.CharField(choices=AnimalType.choices(), max_length=10)
     entry_date = models.DateField()
-    decsription = models.CharField(max_length=120)
+    description = models.CharField(max_length=120)
     size = models.CharField(
         choices=AnimalSize.choices(), default=AnimalSize.MEDIUM, max_length=6
     )
