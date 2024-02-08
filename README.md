@@ -1,5 +1,7 @@
 # django-rest-framework-demo
 
+### A simple demo of the Django rest framwork as a learning tool for myself
+
 ## Pre-requisites:
 
 1. Docker 
