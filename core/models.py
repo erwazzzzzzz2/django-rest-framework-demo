@@ -1,12 +1,16 @@
 """
 Database models
 """
+
 from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
     PermissionsMixin,
 )
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+
+from .utils import AnimalSex, AnimalSize, AnimalStatus, AnimalType
 
 
 class UserManger(BaseUserManager):
@@ -41,3 +45,31 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManger()
 
     USERNAME_FIELD = "email"
+
+
+class Animal(models.Model):
+    """Animal object"""
+
+    name = models.CharField(max_length=20)
+    age = models.IntegerField(validators=[MaxValueValidator(360), MinValueValidator(1)])
+    type = models.CharField(choices=AnimalType.choices(), max_length=10)
+    entry_date = models.DateField()
+    decsription = models.CharField(max_length=120)
+    size = models.CharField(
+        choices=AnimalSize.choices(), default=AnimalSize.MEDIUM, max_length=6
+    )
+    status = models.IntegerField(
+        choices=AnimalStatus.choices(), default=AnimalStatus.AVALIABLE
+    )
+    sex = models.CharField(choices=AnimalSex.choices(), max_length=6)
+    requirements = models.CharField(max_length=100)
+    img_link = models.CharField(max_length=200, blank=True)  # how to do this ?
+
+    class Meta:
+        ordering = ["entry_date"]
+        indexes = [
+            models.Index(fields=["type"], name="type_idx"),
+        ]
+
+    def __str__(self):
+        return self.name
