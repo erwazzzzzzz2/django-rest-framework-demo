@@ -63,7 +63,7 @@ class ModelTest(TestCase):
             age="2",
             type="Dog",
             entry_date=datetime.date(2023, 10, 19),
-            decsription="A decription...",
+            description="A decription...",
             size="medium",
             status=0,
             sex="male",
