@@ -15,11 +15,21 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ["email", "password", "name"]
-        extra_kwargs = {"password": {"write_only": True}, "name": {"read_only": True}}
+        extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
         """Create and return user with hashed password"""
         return get_user_model().objects.create_user(**validated_data)
+
+    def update(self, instance, validated_data):
+        """Override update method to ensure password is hashed"""
+        # Remove password
+        password = validated_data.pop("password", None)
+        user = super().update(instance, validated_data)
+        if password:
+            user.set_password(password)
+            user.save()
+        return user
 
     def validate_password(self, password):
         if len(password) < MIN_PASSWORD_LENGTH:
