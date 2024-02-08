@@ -33,8 +33,6 @@ class AnimalViewSet(viewsets.ModelViewSet):
         """
         Instantiates and returns the list of permissions that this view requires.
         """
-
-        print(f"ACTION = {self.action} and {self.action in UNAUTH_ACTIONS}")
         if self.action not in UNAUTH_ACTIONS:
             return [IsAuthenticated()]
         return []
