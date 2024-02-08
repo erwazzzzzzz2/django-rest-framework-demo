@@ -38,7 +38,7 @@ def create_animal(**params):
 
 
 def detail_url(animal_id):
-    """Create and return a recipe detail URL."""
+    """Create and return a animal detail URL."""
     # This allows the animal id to be added to the detail url
     return reverse("animal:animal-detail", args=[animal_id])
 
