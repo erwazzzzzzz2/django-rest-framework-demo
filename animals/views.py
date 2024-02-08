@@ -8,6 +8,8 @@ from rest_framework.permissions import IsAuthenticated
 from animals import serializers
 from core.models import Animal
 
+UNAUTH_ACTIONS = ["list", "retrieve"]
+
 
 class AnimalViewSet(viewsets.ModelViewSet):
     """View for manage animals APIs."""
@@ -22,18 +24,18 @@ class AnimalViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         """Return the serializer class for request."""
-        if self.action in ("retrieve", "update", "partial_update", "destroy"):
-            return serializers.AnimalDetailSerializer
         if self.action == "list":
             return serializers.AnimalSerializer
 
-        return self.serializer_class
+        return serializers.AnimalDetailSerializer
 
     def get_permissions(self):
         """
         Instantiates and returns the list of permissions that this view requires.
         """
-        if self.action != "list":
+
+        print(f"ACTION = {self.action} and {self.action in UNAUTH_ACTIONS}")
+        if self.action not in UNAUTH_ACTIONS:
             return [IsAuthenticated()]
             # return [permission() for permission in permission_classes]
         return []

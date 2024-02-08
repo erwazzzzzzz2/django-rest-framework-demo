@@ -61,6 +61,16 @@ class PublicAnimalAPITests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer.data)
 
+    def test_get_animal_detail(self):
+        """Test auth is required to call API."""
+        animal = create_animal()
+
+        url = detail_url(animal.id)
+        res = self.client.get(url)
+        serializer = AnimalDetailSerializer(animal)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(res.data, serializer.data)
+
 
 class PrivateAnimalAPITest(TestCase):
 
@@ -78,6 +88,5 @@ class PrivateAnimalAPITest(TestCase):
 
         url = detail_url(animal.id)
         res = self.client.get(url)
-
         serializer = AnimalDetailSerializer(animal)
         self.assertEqual(res.data, serializer.data)
