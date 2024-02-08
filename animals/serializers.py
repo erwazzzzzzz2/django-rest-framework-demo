@@ -22,7 +22,10 @@ class AnimalDetailSerializer(AnimalSerializer):
     class Meta(AnimalSerializer.Meta):
         fields = AnimalSerializer.Meta.fields + [
             "sex",
+            "age",
             "size",
+            "type",
+            "entry_date",
             "status",
             "requirements",
             "description",

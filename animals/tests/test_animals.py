@@ -23,7 +23,7 @@ def create_animal(**params):
         "name": "Ron",
         "age": 120,
         "type": "Dog",
-        "entry_date": datetime.date(1997, 10, 19),
+        "entry_date": datetime.date(2023, 9, 19),
         "description": "description",
         "size": "medium",
         "status": 0,
@@ -71,6 +71,23 @@ class PublicAnimalAPITests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer.data)
 
+    def test_create_animal(self):
+        """Test creating an animal."""
+        payload = {
+            "name": "Daweg",
+            "age": 12,
+            "type": "dog",
+            "entry_date": datetime.date(2023, 10, 19),
+            "description": "description",
+            "size": "large",
+            "status": 0,
+            "sex": "male",
+            "requirements": "Blah",
+            "img_link": "Link text",
+        }
+        res = self.client.post(ANIMAL_URL, payload)
+        self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)
+
 
 class PrivateAnimalAPITest(TestCase):
 
@@ -83,10 +100,30 @@ class PrivateAnimalAPITest(TestCase):
         self.client.force_authenticate(self.user)
 
     def test_get_animal_detail(self):
-        """Test get recipe detail."""
+        """Test get animal detail."""
         animal = create_animal()
 
         url = detail_url(animal.id)
         res = self.client.get(url)
         serializer = AnimalDetailSerializer(animal)
         self.assertEqual(res.data, serializer.data)
+
+    def test_create_animal(self):
+        """Test creating an animal."""
+        payload = {
+            "name": "Daweg",
+            "age": 12,
+            "type": "dog",
+            "entry_date": datetime.date(2023, 10, 19),
+            "description": "description",
+            "size": "large",
+            "status": 0,
+            "sex": "male",
+            "requirements": "Blah",
+            "img_link": "Link text",
+        }
+        res = self.client.post(ANIMAL_URL, payload)
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        animal = Animal.objects.get(id=res.data["id"])
+        for key in payload.keys():
+            self.assertEqual(payload[key], getattr(animal, key))
