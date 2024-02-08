@@ -4,8 +4,13 @@ Tests for models
 Note example.com is a reserved domian and is safe to use for emails
 in tests
 """
+
+import datetime
+
 from django.contrib.auth import get_user_model
 from django.test import TestCase
+
+from core import models
 
 
 class ModelTest(TestCase):
@@ -49,3 +54,20 @@ class ModelTest(TestCase):
 
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
+
+    def test_create_animal(self):
+        """Test create animal"""
+
+        animal = models.Animal.objects.create(
+            name="TestName",
+            age="2",
+            type="Dog",
+            entry_date=datetime.date(2023, 10, 19),
+            decsription="A decription...",
+            size="medium",
+            status=0,
+            sex="male",
+            requirements="",
+        )
+
+        self.assertEqual(str(animal), animal.name)
