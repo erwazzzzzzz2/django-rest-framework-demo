@@ -122,8 +122,31 @@ class PrivateAnimalAPITest(TestCase):
             "requirements": "Blah",
             "img_link": "Link text",
         }
+
         res = self.client.post(ANIMAL_URL, payload)
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         animal = Animal.objects.get(id=res.data["id"])
         for key in payload.keys():
             self.assertEqual(payload[key], getattr(animal, key))
+
+    def test_partial_update(self):
+        """Test partial update of a recipe."""
+        animal = create_animal(name="Moggie", type="cat")
+
+        payload = {"name": "Gadget"}
+        url = detail_url(animal.id)
+        res = self.client.patch(url, payload)
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        animal.refresh_from_db()
+        self.assertEqual(animal.name, payload["name"])
+
+    def test_delete_recipe(self):
+        """Test deleting a recipe successful."""
+        animal = create_animal(name="DeleteMe")
+
+        url = detail_url(animal.id)
+        res = self.client.delete(url)
+
+        self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(Animal.objects.filter(id=animal.id).exists())
