@@ -4,7 +4,7 @@
 
 ### Features
 1. DevContainer
-2. Pre-commit hook running formatting , linting , tests, yaml, markdown and code and secrets checks
+2. Pre-commit hook running formatting , linting , tests, yaml and code and secrets checks
 3. drf-spectacular for API schema.
 
 ### Pre-requisites:
