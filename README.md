@@ -1,18 +1,23 @@
 # django-rest-framework-demo
 
-### A simple demo of the Django rest framwork as a learning tool for myself
+## A simple demo of the Django rest framwork as a learning tool for myself
 
-## Pre-requisites:
+### Features
+1. DevContainer
+2. Pre-commit hook running formatting , linting , tests, yaml, markdown and code and secrets checks
+3. drf-spectacular for API schema.
 
-1. Docker 
+### Pre-requisites:
+
+1. Docker
 2. VSCode
 3. VSCode Dev Containers extension
 4. VSCode Docker extension
 
-## How the aplication was generated 
+### How the aplication was generated
 
 1. Create a folder for your project and navigate into it
-2. Create a virtual environment and install cookiecutter  using the command 
+2. Create a virtual environment and install cookiecutter  using the command
 
 ``` pip install cookiecutter ```
 
@@ -53,12 +58,12 @@ The stub project is generated
 - requirements.txt
 
 
-To the above  were added 
+To the above  were added
 
-1. GitHub actions 
+1. GitHub actions
 2. order app
 
-## Helper commands
+### Helper commands
 
 Some helper command are included in the create project.
 1. ```wait_for_db```  . Wait until the database is avaliable. Useful when undertaking a migraion e.g.
