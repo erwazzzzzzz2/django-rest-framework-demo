@@ -13,7 +13,8 @@
 2. VSCode
 3. VSCode Dev Containers extension
 4. VSCode Docker extension
-
+5. .env file handles secrets
+6. 
 ### How the aplication was generated
 
 1. Create a folder for your project and navigate into it
