@@ -18,6 +18,10 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y git
+
 # Install pip requirements we don't use a virtual env
 COPY requirements.txt .
 RUN python -m pip install -r requirements.txt
