@@ -2,6 +2,7 @@
 Views for the animals APIs
 """
 
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
@@ -16,10 +17,11 @@ class AnimalViewSet(viewsets.ModelViewSet):
 
     serializer_class = serializers.AnimalDetailSerializer
     queryset = Animal.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["age", "sex", "type"]
 
     def get_queryset(self):
         """Retrieve recipes for authenticated user."""
-        # filter by animals available
         return self.queryset.filter(status=0).order_by("-id")
 
     def get_serializer_class(self):

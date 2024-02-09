@@ -2,6 +2,7 @@ version: '3.4'
 
 services:
   backend:
+    env_file: .env
     image: 'django-postgres:dangoapp-LATEST'
     build:
       context: .
@@ -11,20 +12,17 @@ services:
     environment:
       - DB_HOST=postgresdb
       - DB_NAME=db_host
-      - DB_USER=db_user
-      - DB_PASS=changethis
       - DB_PORT=5432
     depends_on:
       - postgresdb
 
   postgresdb:
+    env_file: .env
     image: postgres:15-alpine
-    volumes: 
+    volumes:
       - db-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=db_host
-      - POSTGRES_USER=db_user
-      - POSTGRES_PASSWORD=changethis
 volumes:
   db-data:
 
